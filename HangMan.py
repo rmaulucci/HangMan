@@ -1,7 +1,7 @@
 import string
 import os
 import random
-inc_guess = 0
+wrong_guess = 0
 
 def read_pocket(filename):
     pocket = []
@@ -16,14 +16,14 @@ def choose_word(pocket):
     word = word.strip()
     return word
 
-def game_intro(word):
+def game(word):
     picked=[]
     input("Enter your name: ")
     sec_n = '**Sandskrup**'
     print("Welcome {}! You are allotted only 5 incorrect guesses, so good luck.".format(sec_n))
     print("Your word is {}".format(word_mask(word,picked), word))
 
-    while inc_guess < 5:
+    while wrong_guess < 5:
         guess(word, picked)
         if all(letter in picked for letter in word):
             print('You won {}! The word was {}.'.format(sec_n, word))
@@ -32,9 +32,9 @@ def game_intro(word):
     
 
 def guess(word, picked):
-    global inc_guess
+    global wrong_guess
     print('Picks made thus far: {}'.format(picked))
-    print('{} Incorrect guesses'.format(inc_guess))
+    print('{} Incorrect guesses'.format(wrong_guess))
     print('{}'.format(word_mask(word,picked)))
     letter = input("Guess a letter: ")
 
@@ -45,9 +45,9 @@ def guess(word, picked):
             word_mask(word,picked)
             picked.append(letter.lower())
         else:
-            inc_guess+=1
+            wrong_guess+=1
             picked.append(letter.lower())
-        return word, inc_guess
+        return word, wrong_guess
     elif verify(letter) == False:
         print("Letters only, try again")
 
@@ -67,6 +67,6 @@ def verify(letter):
     
 
 if __name__ == '__main__':
-    inp_file = os.getcwd() + r"\pocket.txt"
-    game_intro(choose_word(read_pocket(inp_file)))
+    inp_file = "pocket.txt"
+    game(choose_word(read_pocket(inp_file)))
 
