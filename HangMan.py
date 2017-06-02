@@ -25,7 +25,7 @@ def game_intro(word):
 
     while inc_guess < 5:
         guess(word, picked)
-        if word == word_mask(word,picked):
+        if all(letter in picked for letter in word):
             print('You won {}! The word was {}.'.format(sec_n, word))
             return
     print('You lose {}! The word was {}'.format(sec_n, word))
@@ -38,7 +38,7 @@ def guess(word, picked):
     print('{}'.format(word_mask(word,picked)))
     letter = input("Guess a letter: ")
 
-    if verify(letter) == 0:
+    if verify(letter) == True:
         if letter in picked:
             print("You've already picked that letter! Pick again")
         elif letter in word:
@@ -48,22 +48,22 @@ def guess(word, picked):
             inc_guess+=1
             picked.append(letter.lower())
         return word, inc_guess
-    elif verify(letter) == 1:
+    elif verify(letter) == False:
         print("Letters only, try again")
 
 def word_mask(word, picked):
     for letter in word:
         if letter in picked:
-          word = word.replace(letter, "{}".format(letter))
+          word = word.replace(letter, "{} ".format(letter))
         else:
           word = word.replace(letter, "_ ")
     return word
 
 def verify(letter):
     if len(letter) == 1 and letter.__class__ == str:
-        return 0
+        return True
     elif len(letter) == 1:
-        return 1
+        return False
     
 
 if __name__ == '__main__':
