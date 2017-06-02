@@ -49,7 +49,7 @@ def guess(word, picked):
             picked.append(letter.lower())
         return word, wrong_guess
     elif verify(letter) == False:
-        print("Letters only, try again")
+        print("Oh jeez, try that again. Just a single letter pelase")
 
 def word_mask(word, picked):
     for letter in word:
@@ -59,12 +59,11 @@ def word_mask(word, picked):
           word = word.replace(letter, "_ ")
     return word
 
-def verify(letter):
-    if len(letter) == 1 and letter.__class__ == str:
+def verify(letter):    
+    if len(letter) == 1 and letter.isalpha(): 
         return True
-    elif len(letter) == 1:
+    else:
         return False
-    
 
 if __name__ == '__main__':
     inp_file = "pocket.txt"
