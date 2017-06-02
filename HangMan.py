@@ -21,7 +21,7 @@ def game(word):
     input("Enter your name: ")
     sec_n = '**Sandskrup**'
     print("Welcome {}! You are allotted only 5 incorrect guesses, so good luck.".format(sec_n))
-    print("Your word is {}".format(word_mask(word,picked), word))
+    print("Your word is {}".format(word_mask(word,picked)))
 
     while wrong_guess < 5:
         guess(word, picked)
@@ -52,7 +52,7 @@ def guess(word, picked):
         print("Oh jeez, try that again. Just a single letter pelase")
 
 def word_mask(word, picked):
-    for letter in word:
+    for letter in set(word):
         if letter in picked:
           word = word.replace(letter, "{} ".format(letter))
         else:
