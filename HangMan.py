@@ -27,8 +27,8 @@ def game_intro(word):
     while inc_guess < 5:
         guess(word, picked)
         if word == word_mask(word,picked):
-            print('You won {}! Play again'.format(sec_n))
-            game_intro(choose_word(read_pocket(inp_file)))
+            print('You won {}! The word was {}.'.format(sec_n, word))
+            return
     print('You lose {}! The word was {}'.format(sec_n, word))
     
 
@@ -55,6 +55,6 @@ def word_mask(word, picked):
     
 
 if __name__ == '__main__':
-    inp_file = r'C:\Users\rmaulucci\Desktop\Python Files\pocket.txt'
+    inp_file = str(os.getcwd()) + r"\pocket.txt"
     game_intro(choose_word(read_pocket(inp_file)))
 
