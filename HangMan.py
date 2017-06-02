@@ -37,15 +37,19 @@ def guess(word, picked):
     print('{} Incorrect guesses'.format(inc_guess))
     print('{}'.format(word_mask(word,picked)))
     letter = input("Guess a letter: ")
-    if letter in picked:
-        print("You've already picked that letter! Pick again")
-    elif letter in word:
-        word_mask(word,picked)
-        picked.append(letter.lower())
-    else:
-        inc_guess+=1
-        picked.append(letter.lower())
-    return word, inc_guess
+
+    if verify(letter) == 0:
+        if letter in picked:
+            print("You've already picked that letter! Pick again")
+        elif letter in word:
+            word_mask(word,picked)
+            picked.append(letter.lower())
+        else:
+            inc_guess+=1
+            picked.append(letter.lower())
+        return word, inc_guess
+    elif verify(letter) == 1:
+        print("Letters only, try again")
 
 def word_mask(word, picked):
     for letter in word:
@@ -54,6 +58,12 @@ def word_mask(word, picked):
         else:
           word = word.replace(letter, "_ ")
     return word
+
+def verify(letter):
+    if len(letter) == 1 and letter.__class__ == str:
+        return 0
+    elif len(letter) == 1:
+        return 1
     
 
 if __name__ == '__main__':
