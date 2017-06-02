@@ -17,7 +17,6 @@ def choose_word(pocket):
     return word
 
 def game_intro(word):
-    inc_guess = 0
     picked=[]
     input("Enter your name: ")
     sec_n = '**Sandskrup**'
