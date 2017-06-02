@@ -37,11 +37,14 @@ def guess(word, picked):
     print('{} Incorrect guesses'.format(inc_guess))
     print('{}'.format(word_mask(word,picked)))
     letter = input("Guess a letter: ")
-    picked.append(letter.lower())
-    if letter in word:
-        word_mask(word,picked)            
+    if letter in picked:
+        print("You've already picked that letter! Pick again")
+    elif letter in word:
+        word_mask(word,picked)
+        picked.append(letter.lower())
     else:
-        inc_guess+=1     
+        inc_guess+=1
+        picked.append(letter.lower())
     return word, inc_guess
 
 def word_mask(word, picked):
@@ -54,6 +57,6 @@ def word_mask(word, picked):
     
 
 if __name__ == '__main__':
-    inp_file = str(os.getcwd()) + r"\pocket.txt"
+    inp_file = os.getcwd() + r"\pocket.txt"
     game_intro(choose_word(read_pocket(inp_file)))
 
